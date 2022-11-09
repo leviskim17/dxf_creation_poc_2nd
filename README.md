@@ -1,6 +1,6 @@
 # DXF-creation-poc-2nd
 
-A 2nd POC project for testing the possiblity to combine three.js & "@tarikjabiri/dxf" based on Starter project for Three.JS as configured with Webpack 4 as a bundler.
+A 2nd POC project for DXF creation test to combine three.js & "@tarikjabiri/dxf" based on Starter project for Three.JS as configured with Webpack 4 as a bundler.
 
 ## Development
 
