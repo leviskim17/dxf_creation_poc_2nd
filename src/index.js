@@ -1,14 +1,12 @@
 import * as THREE from 'three'
 import { WEBGL } from './webgl'
 
-//import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
-
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { TransformControls } from 'three/examples/jsm/controls/TransformControls.js';
 
-//import { saveAs } from 'file-saver';
-//const Drawing = require('dxf-writer');
+import { DxfWriter, point3d, Units, Colors } from "@tarikjabiri/dxf";
+import { saveAs } from 'file-saver';
 
 if (WEBGL.isWebGLAvailable()) {
   let container;
@@ -274,23 +272,25 @@ if (WEBGL.isWebGLAvailable()) {
   }
 
   function exportSpline() {
-    // let d = new Drawing();
+    const dxf = new DxfWriter();
+    dxf.setUnits(Units.Meters);
 
-    // d.setUnits('Decimeters');
-    // d.drawText(10, 0, 10, 0, 'Made by DXF WRITER');
-    // d.addLayer('l_green', Drawing.ACI.GREEN, 'CONTINUOUS');
-    // d.setActiveLayer('l_green');
+    const myLayer = dxf.addLayer("example", Colors.Red);
+    dxf.setCurrentLayerName(myLayer.name);
 
-    // for ( let i = 0; i < splinePointsLength - 1; i ++ ) {
-    //   const p = splineHelperObjects[ i ].position;
-    //   const np = splineHelperObjects[ i + 1 ].position;
-    //   d.drawLine3d(p.x, p.y, p.z, np.x, np.y, np.z);
-    // }
+    for ( let i = 0; i < splinePointsLength - 1; i ++ ) {
+      const p = splineHelperObjects[ i ].position;
+      const np = splineHelperObjects[ i + 1 ].position;
+      dxf.addLine(point3d(p.x, p.y, p.z), point3d(np.x, np.y, np.z));
+    }
 
-    // console.log(d.toDxfString());
+    dxf.setZeroLayerAsCurrent();
 
-    // let blob = new Blob([d.toDxfString()], {type: 'text/plain'});
-    // saveAs (blob, "test.dxf");
+    const dxfString = dxf.stringify();
+    console.log(dxfString);
+
+    let blob = new Blob([dxfString], {type: 'text/plain'});
+    saveAs (blob, "test.dxf");
   }
 
   function load( new_positions ) {
