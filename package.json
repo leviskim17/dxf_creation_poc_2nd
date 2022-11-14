@@ -6,7 +6,9 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "start": "webpack-dev-server --mode development",
-    "format": "prettier --write '**/*.js'"
+    "format": "prettier --write '**/*.js'",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d public"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
   "dependencies": {
     "@tarikjabiri/dxf": "^2.5.4",
     "file-saver": "^2.0.5",
+    "gh-pages": "^4.0.0",
     "three": "^0.115.0"
   },
   "devDependencies": {
@@ -21,5 +24,6 @@
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
-  }
+  },
+  "homepage": "https://leviskim17.github.io/dxf_creation_poc_2nd/"
 }
