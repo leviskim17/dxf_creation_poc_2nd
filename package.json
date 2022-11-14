@@ -18,6 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "@tarikjabiri/dxf": "^2.5.4",
+    "dat.gui": "^0.7.9",
     "file-saver": "^2.0.5",
     "gh-pages": "^4.0.0",
     "three": "^0.115.0"
